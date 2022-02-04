@@ -40,7 +40,7 @@ function App() {
   const getPhotos = async () => {
     try {
       const response = await fetch(
-        "http://jsonplaceholder.typicode.com/photos"
+        "https://jsonplaceholder.typicode.com/photos"
       );
       const json = await response.json();
       if (state.albumId) {
