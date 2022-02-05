@@ -35,7 +35,7 @@ const style = {
   pb: 3,
 };
 
-export default function Modal({ modalData, handleClose, open }) {
+export function Modal({ modalData, handleClose, open }) {
   console.log(modalData);
   return (
     <StyledModal

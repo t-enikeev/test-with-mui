@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Pagination, Stack } from "@mui/material";
 import "./App.css";
-import ImageCard from "./components/image";
-import Modal from "./components/modal";
+import { ImageCard } from "./components/image";
+import { Modal } from "./components/modal";
 
 function App() {
   const [state, setState] = useState({
@@ -14,7 +14,7 @@ function App() {
   });
   const [modalVisability, setModalVisablity] = useState(false);
 
-  useEffect(() => getPhotos(), [state.albumId]);
+  useEffect(() => getPhotos(state.albumId), [state.albumId]);
   useEffect(() => {
     const skip = state.limit * (state.page - 1);
     setState({
@@ -37,20 +37,14 @@ function App() {
     },
   };
 
-  const getPhotos = async () => {
+  const getPhotos = async (albumId = null) => {
     try {
+      const albumSuffix = albumId ? `?albumId=${albumId}` : "";
       const response = await fetch(
-        "https://jsonplaceholder.typicode.com/photos"
+        `https://jsonplaceholder.typicode.com/photos${albumSuffix}`
       );
       const json = await response.json();
-      if (state.albumId) {
-        const filtered = json.filter(
-          (item) => +item.albumId === +state.albumId
-        );
-        setState({ ...state, items: filtered, page: 1 });
-      } else {
-        setState({ ...state, items: json, page: 1 });
-      }
+      setState({ ...state, items: json, page: 1 });
     } catch (e) {
       console.error(e);
     }

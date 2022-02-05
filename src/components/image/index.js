@@ -1,4 +1,4 @@
-function ImageCard(props) {
+export function ImageCard(props) {
   return (
     <div className="ImageCard" onClick={() => props.onClick(props.item)}>
       <img
@@ -11,4 +11,3 @@ function ImageCard(props) {
     </div>
   );
 }
-export default ImageCard;
